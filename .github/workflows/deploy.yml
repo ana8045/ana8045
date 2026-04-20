@@ -1,41 +1,46 @@
+
+---
 name: CI/CD Pipeline
 
 on:
-push:
-branches: [ "project1" ]
+  push:
+    branches:
+      - project1
 
 jobs:
 
-terraform:
-runs-on: ubuntu-latest
+  terraform:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-steps:
-- name: Checkout
-  uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-- name: Setup Terraform
-  uses: hashicorp/setup-terraform@v3
+      - name: Terraform Init
+        run: terraform -chdir=terraform init
 
-- name: Terraform Init
-  run: terraform -chdir=terraform init
+      - name: Terraform Apply
+        run: terraform -chdir=terraform apply -auto-approve
 
-- name: Terraform Apply
-  run: terraform -chdir=terraform apply -auto-approve
+  deploy:
+    needs: terraform
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-deploy:
-needs: terraform
-runs-on: ubuntu-latest
+      - name: Configure kubectl
+        run: |
+          aws eks update-kubeconfig --region ap-south-1 --name demo-cluster
 
+      - name: Deploy App
+        run: kubectl apply -f k8s/
 
-steps:
-- name: Checkout
-  uses: actions/checkout@v3
+# ✅ What Was Wrong (Important)
 
-- name: Configure kubectl
-  run: |
-    aws eks update-kubeconfig --region us-east-1 --name demo-cluster
-
-- name: Deploy App
-  run: kubectl apply -f k8s/
+### ❌ 1. Markdown backticks used
+Remove ALL:
