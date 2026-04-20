@@ -39,8 +39,3 @@ jobs:
 
       - name: Deploy App
         run: kubectl apply -f k8s/
-
-# ✅ What Was Wrong (Important)
-
-### ❌ 1. Markdown backticks used
-Remove ALL:
