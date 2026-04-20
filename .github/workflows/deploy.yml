@@ -1,0 +1,41 @@
+name: CI/CD Pipeline
+
+on:
+push:
+branches: [ "main" ]
+
+jobs:
+
+terraform:
+runs-on: ubuntu-latest
+
+
+steps:
+- name: Checkout
+  uses: actions/checkout@v3
+
+- name: Setup Terraform
+  uses: hashicorp/setup-terraform@v3
+
+- name: Terraform Init
+  run: terraform -chdir=terraform init
+
+- name: Terraform Apply
+  run: terraform -chdir=terraform apply -auto-approve
+
+
+deploy:
+needs: terraform
+runs-on: ubuntu-latest
+
+
+steps:
+- name: Checkout
+  uses: actions/checkout@v3
+
+- name: Configure kubectl
+  run: |
+    aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+
+- name: Deploy App
+  run: kubectl apply -f k8s/
