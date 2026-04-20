@@ -17,13 +17,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-Terraform@v3
 
       - name: Terraform Init
-        run: terraform -chdir=terraform init
+        run: terraform -chdir=Terraform init
 
       - name: Terraform Apply
-        run: terraform -chdir=terraform apply -auto-approve
+        run: terraform -chdir=Terraform apply -auto-approve
 
   deploy:
     needs: terraform
