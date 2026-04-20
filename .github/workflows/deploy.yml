@@ -6,7 +6,12 @@ on:
   push:
     branches:
       - project1
+      
+permissions:
+  id-token: write     # ⭐ REQUIRED FOR OIDC
+  contents: read
 
+  
 jobs:
 
   terraform:
