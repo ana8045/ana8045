@@ -67,4 +67,4 @@ jobs:
         run: aws eks update-kubeconfig --region us-east-1 --name demo-cluster
 
       - name: Deploy Application
-        run: kubectl apply -f k8s/
+        run: kubectl apply -f K8/
