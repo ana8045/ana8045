@@ -10,22 +10,24 @@ permissions:
   contents: read
 
 jobs:
+
   terraform:
     name: Terraform Provisioning
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Configure AWS Credentials
+      # ⭐ OIDC LOGIN
+      - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::962990060412:role/github-oidc-role
           aws-region: us-east-1
-          role-session-name: github-actions
 
-      - name: Verify AWS Login
+      # ⭐ ADD THIS STEP HERE
+      - name: Verify AWS Identity
         run: aws sts get-caller-identity
 
       - name: Setup Terraform
@@ -41,21 +43,25 @@ jobs:
   deploy:
     name: Deploy to EKS
     needs: terraform
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Configure AWS Credentials
+      # ⭐ OIDC AGAIN (NEW JOB NEEDS LOGIN)
+      - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::962990060412:role/github-oidc-role
-          aws-region: us-east-1
-          role-session-name: github-actions
+          aws-region: ap-south-1
+
+      # ⭐ VERIFY AGAIN
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region us-east-1 --name demo-cluster
+        run: aws eks update-kubeconfig --region ap-south-1 --name demo-cluster
 
       - name: Deploy App
         run: kubectl apply -f k8s/
