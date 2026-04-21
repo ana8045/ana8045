@@ -19,18 +19,4 @@ module "eks" {
   }
 
 
-  tags = {
-    Name = "demo-eks-cluster"
-  }
-}
-
-         
-  tags = {
-    Name = "demo-eks-key"
-  }
-}
-
-resource "aws_kms_alias" "eks" {
-  name          = "alias/demo-eks"
-  target_key_id = aws_kms_key.eks.key_id
-}
+ 
