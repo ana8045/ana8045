@@ -8,6 +8,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
@@ -31,10 +37,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+          aws-region: us-west-1
       - name: Configure kubectl
         run: |
-          aws eks update-kubeconfig --region us-west-2 --name my-learning-eks-cluster
+          aws eks update-kubeconfig --region us-west-1 --name my-learning-eks-cluster
       - name: Deploy to Kubernetes
         run: |
           kubectl apply -f deployment.yaml
@@ -68,13 +74,13 @@ jobs:
       - name: Push Docker image to ECR
         if: success() 
         run: |
-          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com
-          docker tag myapp:latest <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/myapp:latest
-          docker push <aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/myapp:latest
+          aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-west-1.amazonaws.com
+          docker tag myapp:latest <aws_account_id>.dkr.ecr.us-west-1.amazonaws.com/myapp:latest
+          docker push <aws_account_id>.dkr.ecr.us-west-1.amazonaws.com/myapp:latest
       - name: Update Kubernetes deployment with new image
         if: success()
         run: |
-          kubectl set image deployment/app-deployment myapp-container=<aws_account_id>.dkr.ecr.us-west-2.amazonaws.com/myapp:latest -n app-EKS
+          kubectl set image deployment/app-deployment myapp-container=<aws_account_id>.dkr.ecr.us-west-1.amazonaws.com/myapp:latest -n app-EKS
       - name: Verify updated deployment
         if: success() 
         run: |
