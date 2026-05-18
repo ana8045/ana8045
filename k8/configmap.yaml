@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: configmap
+metadata:
+  name: app-config
+  namespace: app-EKS
+data:   
+  APP_ENV: "production" 
+  APP_DEBUG: "false" 
+  APP_PORT: "80"
+        

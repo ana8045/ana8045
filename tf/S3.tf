@@ -1,0 +1,10 @@
+resource "aws-s3_bucket" "My_learning" {
+    bucket = var.S3_bucket_name
+    count =  var.count
+    for_each = tolist(["${var.S3_bucket_name}-1", "${var.S3_bucket_name}-2", "${var.S3_bucket_name}-3"])
+    tags = {
+      Name        = var.S3_bucket_name
+      Environment = var.Environment
+    }
+  
+}

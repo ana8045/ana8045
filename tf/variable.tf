@@ -38,3 +38,24 @@ variable "public_subnet" {
   type        = string
   default     = "10.0.2.0/24"
 }
+variable "VPC_cidr_block" {
+  description = "The CIDR block for the VPC."
+  type        = string
+  default     = "10.0.0.0/16"
+}
+variable "s3_bucket_learning" {
+  description = "The name of the S3 bucket to create."
+  type        = string
+  default     = "my-learning-s3-bucket"
+}
+variable "count" {
+  description = "The number of S3 buckets to create."
+  type        = number
+  default     = 2
+}
+variable "eks_cluster_learning" {
+  description = "The name of the EKS cluster to create."
+  type        = string
+  default     = "my-learning-eks-cluster"
+}
+
