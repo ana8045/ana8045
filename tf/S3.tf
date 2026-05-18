@@ -8,3 +8,10 @@ resource "aws-s3_bucket" "My_learning" {
     }
   
 }
+terraform {
+  backend "s3" {
+    bucket = "terraform-backend-state-576"
+    key    = "eks/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
