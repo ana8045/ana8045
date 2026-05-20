@@ -1,12 +1,12 @@
 variable "region" {
   description = "The AWS region to create resources in."
   type        = string
-  default     = "us-east-1"
+  default     = "us-west-1"
 }
 variable "Environment" {
   description = "The environment for the resources."
   type        = string
-  default     = "Dev"
+  default     = "stg"
 }
 variable "VPC_count" {
   description = "The number of VPCs to create."
