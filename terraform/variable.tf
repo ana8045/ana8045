@@ -36,7 +36,7 @@ variable "VPC_cidr_block" {
 variable "S3_bucket_name" {
   description = "The name of the S3 bucket to create."
   type        = string
-  default     = "my-learning-s3-bucket"
+  default     = "my-learning-bucket5646-2026-01"
 }
 variable "eks_cluster_learning" {
   description = "The name of the EKS cluster to create."
