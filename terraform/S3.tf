@@ -1,17 +1,9 @@
-resource "aws-s3_bucket" "My_learning" {
+resource "aws_s3_bucket" "My_learning" {
     bucket = var.S3_bucket_name
-    count =  var.count
     for_each = tolist(["${var.S3_bucket_name}-1", "${var.S3_bucket_name}-2", "${var.S3_bucket_name}-3"])
     tags = {
       Name        = var.S3_bucket_name
       Environment = var.Environment
     }
   
-}
-terraform {
-  backend "s3" {
-    bucket = "terraform-backend-state-576"
-    key    = "eks/terraform.tfstate"
-    region = "us-east-1"
-  }
 }

@@ -13,11 +13,6 @@ variable "Environment" {
   type        = string
   default     = "Dev"
 }
-variable "count" {
-  description = "The number of S3 buckets to create."
-  type        = number
-  default     = 2
-}
 variable "VPC_count" {
   description = "The number of VPCs to create."
   type        = number
