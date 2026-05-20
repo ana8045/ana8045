@@ -1,4 +1,4 @@
-resource "aws_vpc" "My_learning" {
+resource "aws_vpc" "My_learning-01" {
   cidr_block = var.VPC_cidr_block
 
   tags = {
