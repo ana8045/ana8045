@@ -33,7 +33,7 @@ variable "VPC_cidr_block" {
   type        = string
   default     = "10.0.0.0/16"
 }
-variable "s3_bucket_learning" {
+variable "aws_s3_bucket" {
   description = "The name of the S3 bucket to create."
   type        = string
   default     = "my-learning-s3-bucket"
