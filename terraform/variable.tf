@@ -3,11 +3,6 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
-variable "S3_bucket_name" {
-  description = "The name of the S3 bucket to create."
-  type        = string
-  default     = "my-learning-bucket5646-2026-01"
-}
 variable "Environment" {
   description = "The environment for the resources."
   type        = string
