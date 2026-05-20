@@ -16,7 +16,7 @@ variable "VPC_count" {
 variable "VPC" {
   description = "The name of the VPC to create."
   type        = string
-  default     = "my-learning-vpc"
+  default     = "my-learning-vpc-01"
 }
 variable "private_subnet" {
   description = "The CIDR block for the private subnet."
