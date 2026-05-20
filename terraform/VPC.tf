@@ -8,7 +8,7 @@ resource "aws_vpc" "My_learning-01" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id     = aws_vpc.My_learning.id
+  vpc_id     = aws_vpc.My_learning-01.id
   cidr_block = var.private_subnet
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_subnet" "private_subnet" {
 }
 
 resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_vpc.My_learning.id
+  vpc_id     = aws_vpc.My_learning-01.id
   cidr_block = var.public_subnet
 
   tags = {
