@@ -43,11 +43,6 @@ variable "s3_bucket_learning" {
   type        = string
   default     = "my-learning-s3-bucket"
 }
-variable "count" {
-  description = "The number of S3 buckets to create."
-  type        = number
-  default     = 2
-}
 variable "eks_cluster_learning" {
   description = "The name of the EKS cluster to create."
   type        = string
