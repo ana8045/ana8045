@@ -11,5 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout code
+        run: action@checkoutv4
       - name: Read File
         run: cat README.md
