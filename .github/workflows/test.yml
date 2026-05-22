@@ -12,6 +12,6 @@ jobs:
 
     steps:
       - name: checkout code
-        run: actions@checkoutv4
+        uses: actions@checkoutv4
       - name: Read File
         run: cat README.md
