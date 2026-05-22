@@ -1,0 +1,15 @@
+name: multiplejobs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Read File
+        run: cat README.md
