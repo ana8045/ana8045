@@ -1,8 +1,7 @@
 name: multiplejobs
 on: 
    push:
-      branches:
-               [ main ]
+      branches: main
 jobs: 
   build:
     runs-on: ubuntu-latest
@@ -14,5 +13,5 @@ jobs:
     needs: build
     steps:
       - name: Test
-        run: echo " TEST "
+        run: echo " My_name "
       
