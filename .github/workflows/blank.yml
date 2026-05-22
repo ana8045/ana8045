@@ -1,12 +1,17 @@
-name: Hello
-on:
-  push:
-    branches: 
-      [ main ]
-jobs:
-  hello:
+name: multiplejobs
+on: 
+   push:
+      branches:
+               [ main ]
+jobs: 
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: hello
-        run: echo "CICD"
-    
+    - name: build
+      run: echo " Build "
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo " TEST "
+      
