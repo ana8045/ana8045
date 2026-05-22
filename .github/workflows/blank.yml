@@ -1,12 +1,12 @@
-name: Hello-world
-on: workflow_dispatch
+name: Hello
+on:
+  push:
+    branches: 
+      [ main ]
 jobs:
-  Hello:
+  hello:
     runs-on: ubuntu-latest
     steps:
-      - name: Hello
-        run: |
-           echo "1"
-           echo "2"
-
-  
+      - name: hello
+        run: echo "CICD"
+    
