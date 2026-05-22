@@ -13,5 +13,5 @@ jobs:
     needs: build
     steps:
       - name: Test
-        run: echo " My_name "
+        run: echo " Hello , {{ MY_NAME }} "
       
