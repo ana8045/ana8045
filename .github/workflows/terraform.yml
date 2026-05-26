@@ -1,6 +1,6 @@
 name: Terraform
 on: workflow_dispatch
-permission:
+permissions:
   id-token: write
   contents: read
 jobs:
