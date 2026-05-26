@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: deployment
+metadata: 
+  name: python
+  namespace: python
+spec:
+  replicas: 3
+    selector: 
+      matchlabels:
+         name: python
+    template:
+       metadata:
+          labels:
+            app: python
+       spec:
+         containers:
+           - name: pyapp
+             image: aggarwas/pyapp
+             ports:
+               - containerPort: 8000
+    
+  
