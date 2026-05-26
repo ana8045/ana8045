@@ -1,0 +1,43 @@
+name: Terraform
+on: workflow_dispatch
+permission:
+  id-token: write
+  contents: read
+jobs:
+  plan:
+     runs-on: ubuntu-latest
+     defaults:
+       run:
+         working-directory: dev
+     steps:
+       - name: checkout action
+         uses: action/checkout@v2
+       - name: terraform install
+         uses: hashicorp/setup-terraform@v3
+       - name: Aws oidc for access
+         uses: aws-action/configure-aws-credentials@v4
+         with:
+           role-to-assume:
+           role-session-name:
+           aws-region:
+       - name: terraform initi
+         run: terraform init
+       - name: terraform plan
+         run: terraform plan -var_file=
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout action
+        uses: action/checkout@v2
+      - name: terraform setup
+        uses: hashicorp/setup-terraform@v3
+      - name: aws access using oidc
+        uses: aws-action/configure-aws-credentials@v4
+        with:
+          role-to-assume:
+          role-session-name:
+          aws-region:
+     
+          
+        
+       
